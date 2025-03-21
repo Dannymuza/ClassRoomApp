@@ -1,5 +1,6 @@
 package com.example.ApiClassRomm.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,7 +9,11 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCourse;
     private String name;
-
+    @Column(nullable = false, length = 100)
+    @ManyToOne
+    @JoinColumn ( name = "fk_docent",referencedColumnName = "id")
+    @JsonBackReference
+    Teacher teacher;
     public Course() {}
 
     public Course(Integer idCourse, String name) {

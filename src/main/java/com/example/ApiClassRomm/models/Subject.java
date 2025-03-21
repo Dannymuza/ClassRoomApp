@@ -7,6 +7,9 @@ public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSubject;
+    @Column(nullable = false, length = 100)
+    @ManyToOne
+    @JoinColumn(name = "course_id", nullable = false)
     private String name;
 
     public Subject() {}

@@ -8,10 +8,18 @@ public class GradeRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idGradeRecord;
+    @ManyToOne
+    @JoinColumn(name = "id_student", nullable = false)
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Double score;
+
+    @Column(nullable = false, precision = 5, scale = 2)
     private Date evaluationDate;
 
-    public GradeRecord() {}
+
+    public GradeRecord()
+    {}
 
     public GradeRecord(Integer idGradeRecord, Double score, Date evaluationDate) {
         this.idGradeRecord = idGradeRecord;

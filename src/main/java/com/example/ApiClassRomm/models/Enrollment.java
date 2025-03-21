@@ -8,6 +8,8 @@ public class Enrollment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idEnrollment;
+
+    @Column (name = "enrollment_date")
     private Date enrollmentDate;
 
     public Enrollment() {}

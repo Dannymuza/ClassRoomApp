@@ -10,14 +10,22 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idStudent;
-    private String name;
-    private Date birthDate;
-    private String address;
+    @JoinColumn(name = "idStudent", nullable = false)
 
+    private String name;
+    @JoinColumn(name = "id_user", nullable = false)
+    private Date birthDate;
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private String address;
+    @Column(nullable = false, length = 255)
     @Enumerated(EnumType.STRING)
     private Grade grade;
 
-    public Student() {}
+
+    public Student()
+
+    {}
 
     public Student(Integer idStudent, String name, Date birthDate, String address, Grade grade) {
         this.idStudent = idStudent;

@@ -1,17 +1,28 @@
 package com.example.ApiClassRomm.models;
 import com.example.ApiClassRomm.helpers.UserType;
-import jakarta.persistence.Entity;
+import jakarta.annotation.Nonnull;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name="user")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="id_user" )
     private Integer id;
+    @Column(nullable = false, length = 100)
     private String name;
+    @Column( unique = true)
     private String email;
+    @Column (nullable = false,unique = true, length = 150)
     private String password;
+    @Column (nullable = false,length = 150)
     private  String number;
+    @Column (length = 20)
     private UserType userType;
+    public User()
 
-    public User() {
+    {
 
 
     }
