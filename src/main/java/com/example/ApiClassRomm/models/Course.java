@@ -2,6 +2,7 @@ package com.example.ApiClassRomm.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Course {
