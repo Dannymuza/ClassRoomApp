@@ -1,5 +1,4 @@
 package com.example.ApiClassRomm.models;
-
 import com.example.ApiClassRomm.helpers.Grade;
 import jakarta.persistence.*;
 

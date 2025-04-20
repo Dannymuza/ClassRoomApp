@@ -1,3 +1,4 @@
+
 package com.example.ApiClassRomm.repository;
 
 import com.example.ApiClassRomm.models.Teacher;
@@ -6,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ITeacherRepositorie extends JpaRepository <Teacher,Integer>{
+
+
 }
