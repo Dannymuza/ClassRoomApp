@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface IAttendanceRepositorie extends JpaRepository<Attendance,Integer > {
+public interface IAttendanceRepository extends JpaRepository<Attendance,Integer > {
 }

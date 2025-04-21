@@ -1,20 +1,20 @@
 package com.example.ApiClassRomm.Service;
 
 import com.example.ApiClassRomm.models.GradeRecord;
-import com.example.ApiClassRomm.repository.IGradeRecordRepositorie;
+import com.example.ApiClassRomm.repository.IGradeRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class Graderecordservice {
+public class GradeRecordService {
 
     @Autowired
-    IGradeRecordRepositorie Repositorie;
+    IGradeRecordRepository Repository;
 
     public GradeRecord saveGradeRecords(GradeRecord dataGraderecordservice) throws Exception {
         try {
-            return this.Repositorie.save(dataGraderecordservice);
+            return this.Repository.save(dataGraderecordservice);
         } catch (Exception error) {
             throw new Exception(error.getMessage());
         }
@@ -22,14 +22,14 @@ public class Graderecordservice {
 
     public GradeRecord modifyGradeRecords(Integer id, GradeRecord dataGradeRecord) throws Exception {
         try {
-            Optional<GradeRecord> gradeRecordSearch = this.Repositorie.findById(id);
+            Optional<GradeRecord> gradeRecordSearch = this.Repository.findById(id);
             if (gradeRecordSearch.isPresent()) {
                 GradeRecord existingRecord = gradeRecordSearch.get();
                 // Actualizar campos del registro de notas
                 existingRecord.setScore(dataGradeRecord.getScore());
                 existingRecord.setEvaluationDate(dataGradeRecord.getEvaluationDate());
                 // Actualizar relaciones si es necesario
-                return this.Repositorie.save(existingRecord);
+                return this.Repository.save(existingRecord);
             } else {
                 throw new Exception("REGISTRO DE NOTAS NO ENCONTRADO");
             }
@@ -40,7 +40,7 @@ public class Graderecordservice {
 
     public GradeRecord searchGradeRecordsById(Integer id) throws Exception {
         try {
-            Optional<GradeRecord> gradeRecordSearch = this.Repositorie.findById(id);
+            Optional<GradeRecord> gradeRecordSearch = this.Repository.findById(id);
             if (gradeRecordSearch.isPresent()) {
                 return gradeRecordSearch.get();
             } else {
@@ -53,7 +53,7 @@ public class Graderecordservice {
 
     public Iterable<GradeRecord> searchAllGradeRecords() throws Exception {
         try {
-            return this.Repositorie.findAll();
+            return this.Repository.findAll();
         } catch (Exception error) {
             throw new Exception(error.getMessage());
         }
@@ -61,9 +61,9 @@ public class Graderecordservice {
 
     public String deleteGradeRecords(Integer id) throws Exception {
         try {
-            Optional<GradeRecord> gradeRecordSearch = this.Repositorie.findById(id);
+            Optional<GradeRecord> gradeRecordSearch = this.Repository.findById(id);
             if (gradeRecordSearch.isPresent()) {
-                this.Repositorie.deleteById(id);
+                this.Repository.deleteById(id);
                 return "REGISTRO DE NOTAS ELIMINADO EXITOSAMENTE";
             } else {
                 throw new Exception("Registro de notas no encontrado para eliminar");

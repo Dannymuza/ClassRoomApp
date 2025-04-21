@@ -1,9 +1,9 @@
 package com.example.ApiClassRomm.repository;
 
-import com.example.ApiClassRomm.models.GradeRecord;
+import com.example.ApiClassRomm.models.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IGradeRecordRepositorie extends JpaRepository<GradeRecord,Integer> {
+public interface ICourseRepository extends JpaRepository <Course,Integer> {
 }

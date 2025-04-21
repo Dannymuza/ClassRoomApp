@@ -1,20 +1,20 @@
 package com.example.ApiClassRomm.Service;
 
 import com.example.ApiClassRomm.models.Attendance;
-import com.example.ApiClassRomm.repository.IAttendanceRepositorie;
+import com.example.ApiClassRomm.repository.IAttendanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class Attendanceservice {
+public class AttendanceService {
 
     @Autowired
-    IAttendanceRepositorie Repositorie;
+    IAttendanceRepository Repository;
 
     public Attendance saveAttendance(Attendance dataAttendance) throws Exception {
         try {
-            return this.Repositorie.save(dataAttendance);
+            return this.Repository.save(dataAttendance);
         } catch (Exception error) {
             throw new Exception(error.getMessage());
         }
@@ -22,10 +22,10 @@ public class Attendanceservice {
 
     public Attendance modifyAttendance(Integer id, Attendance dataAttendance) throws Exception {
         try {
-            Optional<Attendance> attendanceSearch = this.Repositorie.findById(id);
+            Optional<Attendance> attendanceSearch = this.Repository.findById(id);
             if (attendanceSearch.isPresent()) {
                 Attendance existingAttendance = attendanceSearch.get();
-                return this.Repositorie.save(existingAttendance);
+                return this.Repository.save(existingAttendance);
             } else {
                 throw new Exception("ASISTENCIA NO ENCONTRADA");
             }
@@ -36,7 +36,7 @@ public class Attendanceservice {
 
     public Attendance searchAttendanceById(Integer id) throws Exception {
         try {
-            Optional<Attendance> attendanceSearch = this.Repositorie.findById(id);
+            Optional<Attendance> attendanceSearch = this.Repository.findById(id);
             if (attendanceSearch.isPresent()) {
                 return attendanceSearch.get();
             } else {
@@ -49,7 +49,7 @@ public class Attendanceservice {
 
     public Iterable<Attendance> searchAllAttendances() throws Exception {
         try {
-            return this.Repositorie.findAll();
+            return this.Repository.findAll();
         } catch (Exception error) {
             throw new Exception(error.getMessage());
         }
@@ -57,9 +57,9 @@ public class Attendanceservice {
 
     public String deleteAttendance(Integer id) throws Exception {
         try {
-            Optional<Attendance> attendanceSearch = this.Repositorie.findById(id);
+            Optional<Attendance> attendanceSearch = this.Repository.findById(id);
             if (attendanceSearch.isPresent()) {
-                this.Repositorie.deleteById(id);
+                this.Repository.deleteById(id);
                 return "ASISTENCIA ELIMINADA EXITOSAMENTE";
             } else {
                 throw new Exception("Asistencia no encontrada para eliminar");

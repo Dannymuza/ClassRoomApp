@@ -1,22 +1,22 @@
 package com.example.ApiClassRomm.Service;
 
 import com.example.ApiClassRomm.models.Student;
-import com.example.ApiClassRomm.repository.IStudentRepositorie;
+import com.example.ApiClassRomm.repository.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
     @Service
-    public class Studentservice {
+    public class StudentService {
 
     @Autowired // inyección de dependencias
-    IStudentRepositorie Repositorie;
+    IStudentRepository Repository;
 
     // guardar
     public Student saveStudent(Student dataStudent)throws Exception {
         try {
-            return this.Repositorie.save(dataStudent);
+            return this.Repository.save(dataStudent);
         } catch (Exception error) {
             throw new Exception(error.getMessage());
         }
@@ -25,11 +25,11 @@ import java.util.Optional;
             // modificar
     public Student modifyStudent(Integer id, Student dataStudent) throws Exception {
         try {
-            Optional<Student> studentSearch = this.Repositorie.findById(id);
+            Optional<Student> studentSearch = this.Repository.findById(id);
 
             if (studentSearch.isPresent()) {
                 studentSearch.get().setGrade(dataStudent.getGrade()); // modificando un campo viejo
-                return this.Repositorie.save(studentSearch.get());
+                return this.Repository.save(studentSearch.get());
             } else {
                 throw new Exception("estudiante no encontrado");
             }
@@ -41,7 +41,7 @@ import java.util.Optional;
     // buscar por id
     public Student searchStudentById(Integer id) throws Exception {
         try {
-            Optional<Student> studentSearch = this.Repositorie.findById(id);
+            Optional<Student> studentSearch = this.Repository.findById(id);
             if (studentSearch.isPresent()) {
                 return studentSearch.get();
             } else {
@@ -55,7 +55,7 @@ import java.util.Optional;
     // buscar todos
     public Iterable<Student> searchAllStudents() throws Exception {
         try {
-            return this.Repositorie.findAll();
+            return this.Repository.findAll();
         } catch (Exception error) {
             throw new Exception(error.getMessage());
         }
@@ -64,9 +64,9 @@ import java.util.Optional;
     // eliminar
     public String deleteStudent(Integer id) throws Exception {
         try {
-            Optional<Student> studentSearch = this.Repositorie.findById(id);
+            Optional<Student> studentSearch = this.Repository.findById(id);
             if (studentSearch.isPresent()) {
-                this.Repositorie.deleteById(id);
+                this.Repository.deleteById(id);
                 return "Estudiante eliminado correctamente";
             } else {
                 throw new Exception("estudiante no encontrado para eliminar");

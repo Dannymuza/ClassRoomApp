@@ -1,16 +1,16 @@
 package com.example.ApiClassRomm.Service;
 
 import com.example.ApiClassRomm.models.Subject;
-import com.example.ApiClassRomm.repository.ISubjectRepositorie;
+import com.example.ApiClassRomm.repository.ISubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class Subjectservice {
+public class SubjectService {
 
     @Autowired
-    ISubjectRepositorie Repository;
+    ISubjectRepository Repository;
 
     public Subject saveSubjects(Subject dataSubjets) throws Exception {
         try {

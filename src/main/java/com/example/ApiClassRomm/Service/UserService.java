@@ -1,37 +1,32 @@
 package com.example.ApiClassRomm.Service;
 
 import com.example.ApiClassRomm.models.User;
-import com.example.ApiClassRomm.repository.IUserRepositorie;
+import com.example.ApiClassRomm.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class Userservice {
+public class UserService {
 
     @Autowired
-    IUserRepositorie repositorie;
+    IUserRepository repository;
 
-    //guardar
     public User saveUser(User dataUser) throws Exception {
         try {
-            return this.repositorie.save(dataUser);
+            return this.repository.save(dataUser);
         } catch (Exception mistake) {
             throw new Exception(mistake.getMessage());
         }
     }
 
-    //modificar
     public User modifyUser(Integer id, User dataUser) throws Exception {
         try {
-            Optional<User> userSearch = this.repositorie.findById(id);
+            Optional<User> userSearch = this.repository.findById(id);
 
             if (userSearch.isPresent()) {
-                //modificando campos
-                userSearch.get().setName(dataUser.getName());
-                userSearch.get().setEmail(dataUser.getEmail()); // ejemplo adicional
-                return this.repositorie.save(userSearch.get());
+                return this.repository.save(userSearch.get());
             } else {
                 throw new Exception("usuario no encontrado");
             }
@@ -40,10 +35,10 @@ public class Userservice {
         }
     }
 
-    //buscar por id
+
     public User searchUserById(Integer id) throws Exception {
         try {
-            Optional<User> userSearch = this.repositorie.findById(id);
+            Optional<User> userSearch = this.repository.findById(id);
             if (userSearch.isPresent()) {
                 return userSearch.get();
             } else {
@@ -54,21 +49,21 @@ public class Userservice {
         }
     }
 
-    //buscar todos
+
     public Iterable<User> searchAllUsers() throws Exception {
         try {
-            return this.repositorie.findAll();
+            return this.repository.findAll();
         } catch (Exception error) {
             throw new Exception(error.getMessage());
         }
     }
 
-    //eliminar
+
     public String deleteUser(Integer id) throws Exception {
         try {
-            Optional<User> userSearch = this.repositorie.findById(id);
+            Optional<User> userSearch = this.repository.findById(id);
             if (userSearch.isPresent()) {
-                this.repositorie.deleteById(id);
+                this.repository.deleteById(id);
                 return "Usuario eliminado correctamente";
             } else {
                 throw new Exception("usuario no encontrado para eliminar");

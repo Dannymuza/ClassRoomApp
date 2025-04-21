@@ -1,20 +1,20 @@
 package com.example.ApiClassRomm.Service;
 
 import com.example.ApiClassRomm.models.Enrollment;
-import com.example.ApiClassRomm.repository.IEnrollmentRepositorie;
+import com.example.ApiClassRomm.repository.IEnrollmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class Enrollmentservice {
+public class EnrollmentService {
 
     @Autowired
-    IEnrollmentRepositorie Repositorie;
+    IEnrollmentRepository Repository;
 
     public Enrollment saveEnrollment(Enrollment dataEnrollment) throws Exception {
         try {
-            return this.Repositorie.save(dataEnrollment);
+            return this.Repository.save(dataEnrollment);
         } catch (Exception error) {
             throw new Exception(error.getMessage());
         }
@@ -22,12 +22,12 @@ public class Enrollmentservice {
 
     public Enrollment modifyEnrollment(Integer id, Enrollment dataEnrollment) throws Exception {
         try {
-            Optional<Enrollment> enrollmentSearch = this.Repositorie.findById(id);
+            Optional<Enrollment> enrollmentSearch = this.Repository.findById(id);
             if (enrollmentSearch.isPresent()) {
                 Enrollment existingEnrollment = enrollmentSearch.get();
                 // Actualizar campos de la matrícula
                 existingEnrollment.setEnrollmentDate(dataEnrollment.getEnrollmentDate());
-                return this.Repositorie.save(existingEnrollment);
+                return this.Repository.save(existingEnrollment);
             } else {
                 throw new Exception("MATRÍCULA NO ENCONTRADA");
             }
@@ -38,7 +38,7 @@ public class Enrollmentservice {
 
     public Enrollment searchEnrollmentById(Integer id) throws Exception {
         try {
-            Optional<Enrollment> enrollmentSearch = this.Repositorie.findById(id);
+            Optional<Enrollment> enrollmentSearch = this.Repository.findById(id);
             if (enrollmentSearch.isPresent()) {
                 return enrollmentSearch.get();
             } else {
@@ -51,7 +51,7 @@ public class Enrollmentservice {
 
     public Iterable<Enrollment> searchAllEnrollments() throws Exception {
         try {
-            return this.Repositorie.findAll();
+            return this.Repository.findAll();
         } catch (Exception error) {
             throw new Exception(error.getMessage());
         }
@@ -59,9 +59,9 @@ public class Enrollmentservice {
 
     public String deleteEnrollment(Integer id) throws Exception {
         try {
-            Optional<Enrollment> enrollmentSearch = this.Repositorie.findById(id);
+            Optional<Enrollment> enrollmentSearch = this.Repository.findById(id);
             if (enrollmentSearch.isPresent()) {
-                this.Repositorie.deleteById(id);
+                this.Repository.deleteById(id);
                 return "MATRÍCULA ELIMINADA EXITOSAMENTE";
             } else {
                 throw new Exception("Matrícula no encontrada para eliminar");

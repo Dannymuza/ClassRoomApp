@@ -1,15 +1,15 @@
 package com.example.ApiClassRomm.Service;
 import com.example.ApiClassRomm.models.Teacher;
-import com.example.ApiClassRomm.repository.ITeacherRepositorie;
+import com.example.ApiClassRomm.repository.ITeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class Teacherservice {
+public class TeacherService {
 
     @Autowired
-    ITeacherRepositorie Repository;
+    ITeacherRepository Repository;
 
     public Teacher saveTeacher(Teacher dataTeacher) throws Exception {
         try {

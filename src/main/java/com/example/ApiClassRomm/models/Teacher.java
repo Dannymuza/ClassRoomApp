@@ -1,5 +1,4 @@
 package com.example.ApiClassRomm.models;
-import com.example.ApiClassRomm.repository.ITeacherRepositorie;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 

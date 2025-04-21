@@ -1,19 +1,19 @@
 package com.example.ApiClassRomm.Service;
 
 import com.example.ApiClassRomm.models.Course;
-import com.example.ApiClassRomm.repository.ICourseRepositorie;
+import com.example.ApiClassRomm.repository.ICourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 @Service
-public class Curseservice {
+public class CurseService {
     @Autowired // Inyección de dependencias
-    ICourseRepositorie repositorie;
+    ICourseRepository repository;
 
     // Guardar un curso
     public Course saveCourse(Course dataCourse) throws Exception {
         try {
-            return this.repositorie.save(dataCourse);
+            return this.repository.save(dataCourse);
         } catch (Exception mistake) {
             throw new Exception(mistake.getMessage());
         }
@@ -22,11 +22,11 @@ public class Curseservice {
     // Modificar un curso
     public Course modifyCourse(Integer id, Course dataCourse) throws Exception {
         try {
-            Optional<Course> courseSearch = this.repositorie.findById(id);
+            Optional<Course> courseSearch = this.repository.findById(id);
 
             if (courseSearch.isPresent()) {
                 courseSearch.get().setName(dataCourse.getName()); // Puedes agregar más campos a modificar aquí
-                return this.repositorie.save(courseSearch.get());
+                return this.repository.save(courseSearch.get());
             } else {
                 throw new Exception("curso no encontrado");
             }
@@ -38,7 +38,7 @@ public class Curseservice {
     // Buscar curso por ID
     public Course searchCourseById(Integer id) throws Exception {
         try {
-            Optional<Course> courseSearch = this.repositorie.findById(id);
+            Optional<Course> courseSearch = this.repository.findById(id);
             if (courseSearch.isPresent()) {
                 return courseSearch.get();
             } else {
@@ -52,7 +52,7 @@ public class Curseservice {
     // Buscar todos los cursos
     public Iterable<Course> searchAllCourses() throws Exception {
         try {
-            return this.repositorie.findAll();
+            return this.repository.findAll();
         } catch (Exception error) {
             throw new Exception(error.getMessage());
         }
@@ -61,9 +61,9 @@ public class Curseservice {
     // Eliminar un curso por ID
     public String deleteCourse(Integer id) throws Exception {
         try {
-            Optional<Course> courseSearch = this.repositorie.findById(id);
+            Optional<Course> courseSearch = this.repository.findById(id);
             if (courseSearch.isPresent()) {
-                this.repositorie.deleteById(id);
+                this.repository.deleteById(id);
                 return "Curso eliminado correctamente";
             } else {
                 throw new Exception("curso no encontrado para eliminar");
