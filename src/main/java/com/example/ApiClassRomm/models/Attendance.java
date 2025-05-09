@@ -5,25 +5,20 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-
 public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idAttendance;
-    @ManyToOne
-    @JoinColumn(name = "id_student", nullable = false)
-    @Column(nullable = false)
-    private Date date;
+
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    @Enumerated(EnumType.STRING)
+    private Date date;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TypeAttendanceStatus status;
 
-
-    public Attendance()
-
-    {}
+    public Attendance() {}
 
     public Attendance(Integer idAttendance, Date date, TypeAttendanceStatus status) {
         this.idAttendance = idAttendance;
@@ -40,3 +35,4 @@ public class Attendance {
     public TypeAttendanceStatus getStatus() { return status; }
     public void setStatus(TypeAttendanceStatus status) { this.status = status; }
 }
+

@@ -1,31 +1,54 @@
 package com.example.ApiClassRomm.models;
-
+import com.example.ApiClassRomm.Service.CourseService;
+import com.example.ApiClassRomm.repository.ICourseRepository;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import java.util.Date;
 
 @Entity
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idCourse;
+    private Integer id;
+
     private String name;
-    @Column(nullable = false, length = 100)
+
     @ManyToOne
-    @JoinColumn ( name = "fk_docent",referencedColumnName = "id")
+    @JoinColumn(name = "teacher_id", nullable = false)  // Nombre consistente
     @JsonBackReference
-    Teacher teacher;
+    private Teacher teacher;
+
     public Course() {}
 
-    public Course(Integer idCourse, String name) {
-        this.idCourse = idCourse;
+    public Course(Integer id, String name, Teacher teacher) {  // Añadido teacher
+        this.id = id;
+        this.name = name;
+        this.teacher = teacher;
+    }
+
+    // Getters y setters COMPLETOS
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Integer getIdCourse() { return idCourse; }
-    public void setIdCourse(Integer idCourse) { this.idCourse = idCourse; }
+    public Teacher getTeacher() {
+        return teacher;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 }
+
 

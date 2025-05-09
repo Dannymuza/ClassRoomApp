@@ -1,12 +1,11 @@
 package com.example.ApiClassRomm.Service;
-
 import com.example.ApiClassRomm.models.Course;
 import com.example.ApiClassRomm.repository.ICourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 @Service
-public class CurseService {
+public class CourseService {
     @Autowired // Inyección de dependencias
     ICourseRepository repository;
 
