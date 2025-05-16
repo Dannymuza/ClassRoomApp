@@ -3,37 +3,46 @@ package com.example.ApiClassRomm.models;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "subjects")
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idSubject;
+    @Column(name = "id_subject")
+    private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Usar FetchType.LAZY para mejor rendimiento
-    @JoinColumn(name = "course_id", nullable = false) // Especifica la columna de la clave foránea
-    private Course course; // La propiedad ahora es del tipo Course, representando la relación
-
-    @Column(name = "subject_name", nullable = false, length = 100)
+    @Column(nullable = false, length = 100)
     private String name;
 
-    public Subject() {}
+    @ManyToOne
+    @JoinColumn(name = "id_course", nullable = false)
+    private Course Course;
 
-    public Subject(Integer idSubject, Course course, String name) {
-        this.idSubject = idSubject;
-        this.course = course;
+    public Subject(){}
+
+    public Subject(Integer id, String name, Course course){
+        this.id = id;
+        this.name = name;
+        this.Course = course;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Integer getIdSubject() { return idSubject; }
-    public void setIdSubject(Integer idSubject) { this.idSubject = idSubject; }
-
     public Course getCourse() {
-        return course;
+        return Course;
     }
-
     public void setCourse(Course course) {
-        this.course = course;
+        this.Course = course;
     }
-
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
 }
